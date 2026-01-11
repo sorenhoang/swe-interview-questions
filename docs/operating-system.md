@@ -221,3 +221,155 @@ Yes. Although process that have isolate address space. but they can access or ch
 * Copy-On-Write (COW) is an optimization strategy used in computer programming and operating systems to efficiently manage memory. When multiple processes share the same data, COW allows them to share the same physical memory pages until one of the processes attempts to modify the data. At that point, a separate copy of the data is created for the modifying process, ensuring that changes do not affect the original data or other processes.
 * Dirty COW is a specific vulnerability (CVE-2016-5195) that exploits the Copy-On-Write mechanism in the Linux kernel. It allows an unprivileged user to gain write access to read-only memory mappings, potentially leading to privilege escalation. The vulnerability arises from a race condition in the way the kernel handles COW, allowing an attacker to manipulate memory in a way that bypasses normal access controls.
 </details>
+
+
+<details>
+<summary>Concurrency vs Parallelism?</summary>
+
+**Concurrency:**
+
+* *Concurrency* is the ability to handle multiple tasks at the same time logically.
+
+* Tasks make progress via interleaving, not necessarily running simultaneously.
+
+* It can exist on a single CPU core using context switching.
+
+* Focus: responsiveness, structure, scalability.
+
+**Parallelism:**
+
+* *Parallelism* means executing multiple tasks simultaneously.
+
+* It requires multiple CPU cores (or machines).
+
+* Focus: higher throughput and faster execution.
+
+**Relationship:**
+
+* *Concurrency* and *parallelism* are not the same.
+
+* *Concurrency* is a program design concept.
+
+* *Parallelism* is an execution concept tied to hardware.
+</details>
+
+<details>
+<summary>What is critical zone?</summary>
+
+A **critical section** (or critical zone) is a part of a multi-threaded program where shared resources (like variables, data structures, or files) are accessed and modified. To protect a critical section from concurrent access by multiple threads, synchronization mechanisms (like mutexes, semaphores, or monitors) are used to ensure that only one thread can execute the critical section at a time. 
+
+</details>
+
+<details>
+<summary>What is race condition and how to handle this case?</summary>
+
+A **Race condition** occurs when multiple threads or processes access shared data concurrently, and the final outcome depends on the timing of their execution. 
+* Different timing → different outcomes
+* Typically caused by unprotected critical sections
+
+**Causes:**
+* Shared mutable state
+* Lack of synchronization
+* Context switching at unsafe points
+
+**Consequences:**
+* Incorrect results
+* Hard-to-reproduce bugs
+* Unpredictable system behavior
+
+**Handling**
+* Proper synchronization using mutexes, semaphores, or monitors
+* Use atomic operations for simple shared variables
+* Minimize shared state
+* Higher-level concurrency design
+
+</details>
+
+<details>
+<summary>What is locking mechanism?</summary>
+
+A **locking mechanism** is a synchronization technique used to enforce mutual exclusion, ensuring that only one thread or process can access a critical section at a time.
+
+How it works:
+* a thread/process requests a lock before entering a critical section.
+* if a lock is already held, other threads/processes must wait.
+* once the thread/process exits the critical section, it releases the lock.
+
+Locking mechanisms include:
+* Mutexes (Mutual Exclusion Locks): exclusive locks for threads within the same process.
+* Semaphores: counting locks that allow multiple threads/processes to access a resource up to a limit.
+* Spinlocks: busy-wait locks for short critical sections.
+* Read-Write Locks: allow multiple readers or one writer.
+
+Cost and trade-offs:
+* Locking introduces overhead due to context switching and waiting.
+* Easy to cause deadlocks, startvation, and reduced concurrency if not used carefully.
+
+Best practices:
+* Keep critical sections short.
+* Avoid nested locks.
+
+</details>
+
+<details>
+<summary>What is deadlock and how to avoid deadlock?</summary>
+
+A **deadlock** is when there is a circle where some processes lock something and wait for something that other processes have already locked.
+
+A deadlock occurs when all four Coffman conditions are met:
+1. Mutual Exclusion: At least one resource must be held in a non-shareable mode.
+2. Hold and Wait: A process holding at least one resource is waiting to acquire additional resources held by other processes.
+3. No Preemption: Resources cannot be forcibly taken from a process holding them.
+4. Circular Wait: A set of processes are waiting for each other in a circular chain.
+
+Avoiding deadlock:
+* Deadlock Prevention: Ensure at least one Coffman condition cannot hold.
+* Deadlock Avoidance: Use algorithms like Banker's Algorithm to dynamically check resource allocation.
+* Deadlock Detection and Recovery: Allow deadlocks to occur, then detect and recover by terminating or rolling back processes.
+</details>
+
+<details>
+<summary>What is starvation?</summary>
+
+**Starvation** occurs when a process is perpetually denied access to resources it needs to proceed, often because other higher-priority processes are continuously favored. This can happen in priority-based scheduling systems where low-priority processes may never get CPU time.
+
+**Causes of Starvation:**
+* Priority Scheduling: High-priority processes monopolize CPU time.
+* Resource Allocation: Certain processes may hold resources indefinitely.
+* Locking Mechanisms: Improper use of locks can lead to some threads being perpetually
+
+</details>
+
+<details>
+<summary>Explain mutex and semaphore</summary>
+
+**Mutex (Mutual Exclusion Object):**
+* A mutex is a locking mechanism used to ensure that only one thread can access a critical section at a time.
+* It provides exclusive access to a resource.
+* Only the thread that locks the mutex can unlock it.
+
+**Semaphore:**
+* A semaphore is a synchronization primitive that maintains a count to control access to a shared resource.
+* Allows multiple threads to access a resource up to a specified limit.
+* Two types: counting semaphores (allow multiple accesses) and binary semaphores (similar to mutexes).
+
+</details>
+
+<details>
+<summary>What is spinlock?</summary>
+
+A **spinlock** is a type of lock used in multi-threaded programming to protect shared resources. Unlike traditional locks that put a thread to sleep when it cannot acquire the lock, a spinlock causes the thread to continuously check (or "spin") in a loop until the lock becomes available.
+**Characteristics of Spinlocks:**
+* Busy-Waiting: Threads actively wait for the lock, consuming CPU cycles.
+* Low Overhead: Avoids the overhead of context switching, making it suitable for short critical
+  
+**When to Use Spinlocks:**
+* When the expected wait time is very short.
+* In low-latency scenarios where context switch overhead is unacceptable.
+* In multi-processor systems where threads can run concurrently.
+
+**Drawbacks:**
+* Wastes CPU resources while spinning.
+* Can lead to priority inversion if not managed properly.
+* Not suitable for long critical sections.
+</details>
