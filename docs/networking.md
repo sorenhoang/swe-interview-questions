@@ -84,6 +84,7 @@ Once this three-step process is complete, a reliable TCP connection is establish
 
 <details>
 <summary>What happens during TCP connection termination? </summary>
+
 TCP connection termination involves a four-step process to gracefully close a connection between a client and server:
 1. **FIN from Client**: The client sends a FIN (Finish) packet to the server, indicating that it has finished sending data.
 2. **ACK from Server**: The server acknowledges the client's FIN by sending an ACK (Acknowledge) packet back to the client.
