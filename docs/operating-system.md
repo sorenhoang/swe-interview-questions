@@ -136,6 +136,7 @@ Two main types of scheduling
 
 Goals of CPU scheduling
 
+* 
 * Maximize CPU utilization
 
 * Improve throughput
@@ -146,4 +147,77 @@ Goals of CPU scheduling
 
 In summary:
 * CPU scheduling combines scheduling algorithms, context switching, and dispatcher logic to efficiently share CPU resources.
+</details>
+
+<details>
+<summary>Why do they say that Thread is a lightweight process?</summary>
+
+A thread is called a lightweight process because it requires fewer system resources than a process while still being an independent unit of execution.
+
+Key reasons:
+
+* Resource sharing
+
+  * Threads within the same process share the address space, heap, and file descriptors
+
+  * Processes have fully isolated resources
+
+* Lower creation cost
+
+  * Creating a thread is faster and cheaper than creating a process
+
+  * No need to allocate a new address space
+
+* Cheaper context switching
+
+  * Thread context switches do not require changing the address space
+
+  * This makes them significantly cheaper than process switches
+
+* Efficient communication
+
+  * Threads communicate via shared memory
+
+  * Processes usually rely on IPC mechanisms, which are more expensive
+
+Trade-off
+
+* Because threads share memory, they are more prone to race conditions and synchronization issues
+</details>
+
+<details>
+<summary>Can 2 different processes access or change data of each other address space?</summary>
+
+Yes. Although process that have isolate address space. but they can access or change data of each other by some mechanisms provided by the operating system. Some common methods include:
+* Inter-Process Communication (IPC):
+
+  * Mechanisms like pipes, message queues, and sockets allow processes to exchange data.
+* Shared Memory:
+
+  * The OS can allocate a shared memory segment that multiple processes can map into their address spaces.
+* Message Passing:
+  * Processes can send and receive messages to share data without directly accessing each other's memory.
+* Debugging and Tracing Tools:
+
+  * Some OS-level debugging tools allow one process to inspect or modify another process's memory for debugging purposes.
+
+</details>
+
+<details>
+<summary>What is child-process? How to create a child-process?</summary>
+
+* Child-process is a process created by another process (the parent process) using system calls provided by the operating system (usually fork() in Unix-like systems).
+  * Each child-process has only one parent process, but a parent process can have multiple child-processes.
+  * Child-processes inherit certain attributes from their parent(such as environment variables, open file descriptors, etc.), but they have their own separate memory space.
+  * if a parent process terminates before its child-processes, the child-processes are adopted by the init process (PID 1) in Unix-like systems.
+* To Create a child-process:
+  * In Unix-like systems, the fork() system call is used to create a new child-process. When a process calls fork(), the operating system creates a duplicate of the calling process.
+  * The fork() call returns twice: once in the parent process (returning the child's PID) and once in the child-process (returning 0).
+</details>
+
+<details>
+<summary>What is copy on write (COW), Dirty COW?</summary>
+
+* Copy-On-Write (COW) is an optimization strategy used in computer programming and operating systems to efficiently manage memory. When multiple processes share the same data, COW allows them to share the same physical memory pages until one of the processes attempts to modify the data. At that point, a separate copy of the data is created for the modifying process, ensuring that changes do not affect the original data or other processes.
+* Dirty COW is a specific vulnerability (CVE-2016-5195) that exploits the Copy-On-Write mechanism in the Linux kernel. It allows an unprivileged user to gain write access to read-only memory mappings, potentially leading to privilege escalation. The vulnerability arises from a race condition in the way the kernel handles COW, allowing an attacker to manipulate memory in a way that bypasses normal access controls.
 </details>
