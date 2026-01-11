@@ -19,7 +19,6 @@ The questions from many publicly available resources have been curated and organ
 ## Computer Architecture
 
 - [Documentations](docs/computer-architecture.md)
-- [Answers](answers/computer-architecture.md)
 
 ## Operating Systems
 
