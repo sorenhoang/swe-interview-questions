@@ -150,3 +150,92 @@ TCP closes a connection using a four-step process known as the four-way handshak
 4. **ACK from Client**: Finally, the client acknowledges the server's FIN by sending an ACK packet back to the server.
 After these four steps, the TCP connection is fully terminated. Both sides enter a TIME_WAIT state to ensure that any delayed packets are properly handled before completely closing the connection.
 </details>
+
+<details>
+<summary>What is TTL? How does TTL change?</summary>
+
+**TTL (Time to Live)** is a field in the IP header that specifies the maximum number of hops (routers) a packet can traverse before being discarded. It is used to prevent packets from circulating indefinitely in the network.
+
+When a packet is sent, the TTL value is set to a specific number (e.g., 64, 128). Each time the packet passes through a router, the router decrements the TTL value by 1. If the TTL value reaches 0 before reaching its destination, the packet is discarded, and an ICMP "Time Exceeded" message is sent back to the sender.
+
+</details>
+
+<details>
+<summary>What is HTTP and how does it work?</summary>
+
+**HTTP (Hypertext Transfer Protocol)** is an application-layer protocol used for transmitting hypermedia documents, such as HTML, over the internet. It is the foundation of data communication for the World Wide Web.
+HTTP works on a request-response model:
+1. **Client Request**: A client (usually a web browser) sends an HTTP request to a server. The request includes a method (e.g., GET, POST), the URL of the resource, headers, and sometimes a body (for methods like POST).
+2. **Server Response**: The server processes the request and sends back an HTTP response.
+The response includes a status code (e.g., 200 OK, 404 Not Found), headers, and the requested resource (e.g., HTML content).
+HTTP is stateless, meaning each request is independent and does not retain any information about previous requests. To maintain state, mechanisms like cookies and sessions are used.
+
+</details>
+
+<details>
+<summary>HTTP/1.1 vs HTTP/2 vs HTTP/3. </summary>
+
+**HTTP/1.1**:
+- Text-based protocol
+- Uses a single connection per request/response cycle
+- Supports persistent connections (keep-alive)
+- Limited multiplexing capabilities
+
+**HTTP/2**:
+- Binary protocol
+- Supports multiplexing multiple requests/responses over a single connection
+- Header compression to reduce overhead
+- Server push capabilities
+
+**HTTP/3**:
+- Based on QUIC protocol (built on UDP)
+- Improved performance with reduced latency
+- Better handling of packet loss
+- Connection migration support
+- 
+**Summary**: HTTP/2 and HTTP/3 offer significant performance improvements over HTTP/1.1, with HTTP/3 providing the most advanced features for modern web applications.
+</details>
+
+<details>
+<summary>What is DNS and how it works?</summary>
+
+**DNS (Domain Name System)** is a hierarchical and decentralized naming system used to translate human-readable domain names (e.g., www.example.com) into IP addresses (e.g 142.250.190.14) that computers use to identify each other on the network.
+When a user enters a domain name in their web browser, the following steps occur:   
+1. **DNS Query**: The browser sends a DNS query to a DNS resolver (usually provided by the ISP) to resolve the domain name.
+2. **Recursive Resolution**: The DNS resolver checks its cache for the IP address. If not found, it performs a recursive query, contacting root servers, TLD (Top-Level Domain) servers, and authoritative name servers to find the IP address.
+3. **Response**: Once the IP address is found, the DNS resolver sends it back to the browser.
+4. **Connection**: The browser uses the IP address to establish a connection to the web server and retrieve the requested web page.
+5. **Caching**: DNS responses are often cached by the resolver and the client to speed up future requests for the same domain.
+
+**Summary**: DNS is essential for the functionality of the internet, allowing users to access websites using easy-to-remember domain names instead of numerical IP addresses.
+</details>
+
+<details>
+<summary>What happens when you type a URL in the browser?</summary>
+
+When you type a URL in the browser, the following steps occur:
+1. **URL Parsing**: The browser parses the URL to extract the protocol (e.g http/https), domain name, path, and query parameters.
+2. **DNS Resolution**: The browser sends a DNS query to resolve the domain name into an IP address.
+3. **Establishing Connection**: The browser establishes a TCP connection to the server using the resolved IP address. If the URL uses HTTPS, a TLS handshake is performed to secure the connection.
+4. **Sending HTTP Request**: The browser sends an HTTP request to the server, specifying the desired resource (e.g., a web page).
+5. **Server Processing**: The server processes the request, retrieves the requested resource, and generates an HTTP response.
+6. **Receiving HTTP Response**: The browser receives the HTTP response, which includes the status code, headers, and the requested content (e.g., HTML, CSS, JavaScript).
+7. **Rendering the Page**: The browser renders the web page by parsing the HTML, applying styles from CSS, and executing JavaScript.
+8. **Displaying the Page**: The fully rendered web page is displayed to the user.   
+
+**Summary**: Typing a URL in the browser initiates a series of steps involving DNS resolution, connection establishment, HTTP communication, and page rendering to display the requested web content.
+</details>
+
+<details>
+<summary>Explain latency vs throughput. </summary>
+
+**Latency** refers to the time it takes for a data packet to travel from the source to the destination. It is typically measured in milliseconds (ms) and represents the delay experienced in communication. Lower latency is crucial for real-time applications like online gaming and video conferencing.
+
+**Throughput**, on the other hand, refers to the amount of data that can be transmitted over a network in a given period of time. It is usually measured in bits per second (bps) or bytes per second (Bps). Higher throughput indicates a greater capacity for data transfer, which is important for applications like file downloads and streaming services.
+**Use Cases**:
+- Low Latency: Online gaming, video conferencing, VoIP
+- High Throughput: File downloads, video streaming, cloud storage
+
+**Trade-offs**: Networks with low latency may not always have high throughput, and vice versa. Optimizing for one can sometimes lead to compromises in the other.
+**Summary**: Latency measures delay, while throughput measures data transfer capacity. Both are important for network performance but impact different aspects of user experience.
+</details>
