@@ -106,3 +106,47 @@ TCP congestion control is a set of algorithms and mechanisms used to prevent net
 
 **TCP congestion control** dynamically adjusts the sending rate based on network feedback to avoid overwhelming the network.
 </details>
+
+<details>
+<summary>How TCP handles the connection?</summary>
+
+TCP handles a connection by managing its entire lifecycle, from establishment to termination.
+
+It first establishes the connection using a three-way handshake to synchronize state between both endpoints.
+During data transmission, TCP ensures reliability through acknowledgements and retransmissions, applies flow control to protect the receiver, and uses congestion control to adapt to network conditions.
+
+Finally, TCP terminates the connection using a four-way handshake and maintains connection states to ensure a clean and reliable shutdown.
+
+**Summary**: TCP is a stateful protocol that manages connection setup, reliable data transfer, congestion control, and graceful teardown.
+
+</details>
+
+<details>
+<summary>What happens if some bits are wrong due to connection errors? How to detect them and fix them?</summary>
+
+If some bits are wrong, the checksum of this packet will not match. In this case, the receiver will discard this packet.
+The sender will retransmit the packet after a timeout or upon receiving duplicate ACKs.
+
+</details>
+
+<details>
+<summary>How to detect the appropriate number of packets to send (speed of sending packet)?</summary>
+
+TCP determines the appropriate sending rate by dynamically adjusting its congestion window based on network feedback.
+
+It starts with a small sending rate and gradually increases it while monitoring acknowledgements and round-trip time.
+If packet loss or timeouts occur, TCP interprets them as signs of congestion and reduces the sending rate.
+
+The effective sending rate is limited by the minimum of the congestion window and the receiver window.
+</details>
+
+<details>
+<summary>How TCP close the connection?</summary>
+
+TCP closes a connection using a four-step process known as the four-way handshake:
+1. **FIN from Client**: The client sends a FIN (Finish) packet to the server, indicating that it has finished sending data.
+2. **ACK from Server**: The server acknowledges the client's FIN by sending an ACK (Acknowledge) packet back to the client.
+3. **FIN from Server**: The server then sends its own FIN packet to the client, indicating that it has also finished sending data.
+4. **ACK from Client**: Finally, the client acknowledges the server's FIN by sending an ACK packet back to the server.
+After these four steps, the TCP connection is fully terminated. Both sides enter a TIME_WAIT state to ensure that any delayed packets are properly handled before completely closing the connection.
+</details>
