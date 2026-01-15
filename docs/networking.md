@@ -239,3 +239,114 @@ When you type a URL in the browser, the following steps occur:
 **Trade-offs**: Networks with low latency may not always have high throughput, and vice versa. Optimizing for one can sometimes lead to compromises in the other.
 **Summary**: Latency measures delay, while throughput measures data transfer capacity. Both are important for network performance but impact different aspects of user experience.
 </details>
+
+<details>
+<summary>What is a load balancer? </summary>
+
+**A load balancer** is a device or software that distributes network or application traffic across multiple servers to ensure no single server becomes overwhelmed. It helps improve the availability, reliability, and performance of applications by balancing the load, optimizing resource use, and preventing server overloads. Load balancers can operate at different layers of the OSI model, such as Layer 4 (transport layer) or Layer 7 (application layer), and can use various algorithms like round-robin, least connections, or IP hash to determine how to distribute traffic.
+
+A load balancer is often the first building block for scalability and reliability in distributed systems.
+
+</details>
+
+<details>
+
+<summary>Layer 4 vs Layer 7 load balancing. </summary>
+
+**Layer 4 Load Balancing**:
+- Operates at the transport layer (OSI Layer 4)
+- Makes routing decisions based on IP address and TCP/UDP port information
+- Faster and more efficient due to less processing overhead
+- Suitable for simple load balancing scenarios where content-based routing is not required 
+
+**Layer 7 Load Balancing**:
+- Operates at the application layer (OSI Layer 7)
+- Makes routing decisions based on application-level data, such as HTTP headers, cookies, or URL paths
+- More flexible and capable of advanced routing, such as content-based routing and SSL termination
+- Slightly slower due to increased processing overhead
+
+**Use Cases**:
+- Layer 4: Simple TCP/UDP load balancing, gaming servers, VoIP
+- Layer 7: Web applications, APIs, content delivery networks (CDNs)
+
+**Summary**: Layer 4 load balancing is faster and simpler, while Layer 7 load balancing offers more advanced features and flexibility for application-level traffic management.
+
+</details>
+
+<details>
+<summary>What is NAT and how it works?</summary>
+
+**NAT (Network Address Translation)** is a technique that translates private IP addresses into a public IP address when traffic passes through a router or gateway.
+
+When a device on a private network sends a request to the internet, the NAT-enabled router modifies the source IP address of the outgoing packet to its own public IP address. It also keeps track of the mapping between the private IP address and the public IP address in a NAT table.
+
+When the response comes back from the internet, the router looks up the NAT table to find the corresponding private IP address and modifies the destination IP address of the incoming packet before forwarding it to the appropriate device on the private network.
+> NAT is a practical solution for IPv4 scarcity, but it introduces complexity for protocols that require peer-to-peer communication.
+
+</details>
+
+
+<details>
+
+<summary>What is CDN and how it works? </summary>
+
+**CDN (Content Delivery Network)** is a distributed network of servers strategically located in various geographic locations to deliver web content and services to users more efficiently.
+
+When a user requests content from a website that uses a CDN, the request is routed to the nearest CDN server (also known as an edge server) based on the user's geographic location. The CDN server then delivers the requested content, such as images, videos, or web pages, from its cache rather than fetching it from the origin server. This reduces latency, decreases load on the origin server, and improves overall performance.
+CDNs also use techniques like load balancing, caching, and compression to optimize content delivery and ensure high availability.
+> A CDN is a distributed network of edge servers that delivers content from locations closer to users to reduce latency and improve performance.
+
+</details>
+
+<details>
+<summary>Explain retry and timeout strategies.</summary>
+
+**Retry and timeout strategies** are essential for ensuring reliable communication in networked applications. They help handle transient failures and improve the overall user experience.
+1. **Timeouts**: A timeout is a predefined period that a client waits for a response from a server before considering the request failed. If the response is not received within this time frame, the client can take appropriate action, such as retrying the request or notifying the user of a failure. Timeouts should be set based on expected network conditions and application requirements.
+
+2. **Retries**: When a request fails due to a timeout or other transient errors (e.g., network congestion, server overload), the client can retry the request. The retry strategy should include:
+   - **Maximum Retry Attempts**: Limit the number of retries to avoid overwhelming the server or causing excessive delays.
+   - **Backoff Strategy**: Implement an exponential backoff mechanism, where the wait time between retries increases exponentially with each attempt. This helps reduce the load on the server and allows time for transient issues to resolve.
+   - **Jitter**: Introduce randomness to the backoff intervals to prevent synchronized retries from multiple clients, which can lead to a "thundering herd" problem.
+
+**Summary**: Effective retry and timeout strategies involve setting appropriate timeouts, limiting retry attempts, and using backoff and jitter techniques to handle transient failures gracefully.
+</details>
+
+<details>
+<summary>What is packet loss and how to handle it?</summary>
+
+**Packet loss** occurs when one or more data packets transmitted over a network fail to reach their destination. This can happen due to various reasons, such as network congestion, faulty hardware, signal interference, or software bugs.
+To handle packet loss, several strategies can be employed:
+1. **Retransmission**: Protocols like TCP automatically detect lost packets through acknowledgments and retransmit them to ensure reliable data delivery.
+2. **Forward Error Correction (FEC)**: This technique adds redundant data to the original packets, allowing the receiver to reconstruct lost packets without needing retransmission.
+3. **Quality of Service (QoS)**: Implementing QoS policies can prioritize critical traffic, reducing the likelihood of packet loss for important data.
+4. **Network Optimization**: Improving network infrastructure, such as upgrading hardware or increasing bandwidth, can help reduce packet loss.
+5. **Monitoring and Alerts**: Regularly monitoring network performance and setting up alerts for high packet loss can help identify and address issues promptly.
+
+**Summary**: Packet loss can be managed through retransmission, error correction, QoS, network optimization, and monitoring to ensure reliable communication.
+
+</details>
+
+<details>
+<summary>What is a socket?</summary>
+
+A **socket** is an endpoint for communication between two machines over a network. 
+
+It is a combination of an IP address and a port number, allowing applications to send and receive data. They provide a programming interface for network communication, enabling developers to create networked applications.
+
+Types of sockets include:
+- **Stream Sockets (TCP)**: Provide reliable, connection-oriented communication.
+- **Datagram Sockets (UDP)**: Provide connectionless communication with no guarantee of delivery.
+- **Unix Domain Sockets**: Used for inter-process communication on the same host.
+
+Socket lifecycle includes:
+1. **Creation**: A socket is created using system calls (e.g., socket()).
+2. **Binding**: The socket is bound to a specific IP address and port (e.g., bind()).
+3. **Listening**: For server sockets, it listens for incoming connections (e.g., listen()).
+4. **Accepting Connections**: Accept incoming connection requests (e.g., accept()).
+5. **Data Transmission**: Send and receive data using send() and recv() functions.
+6. **Closure**: Close the socket when communication is complete (e.g., close())
+
+**Summary**: A socket is a communication endpoint that enables data exchange between applications over a network using various protocols.
+
+</details>
