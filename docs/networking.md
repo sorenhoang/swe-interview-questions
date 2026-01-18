@@ -350,3 +350,55 @@ Socket lifecycle includes:
 **Summary**: A socket is a communication endpoint that enables data exchange between applications over a network using various protocols.
 
 </details>
+
+<details>
+<summary>What is head-of-line blocking? </summary>
+
+**Head-of-line (HOL) blocking** is a performance-limiting phenomenon that occurs in networking and computer systems when a line of packets or data units is held up by the first packet in the queue. This means that if the first packet is delayed or lost, all subsequent packets must wait, even if they could be processed independently. HOL blocking can lead to increased latency and reduced throughput, especially in protocols like TCP, where packets must be processed in order.
+HOL blocking can be mitigated through techniques such as:
+1. **Multiplexing**: Using protocols like HTTP/2 or QUIC that allow multiple streams of data to be sent simultaneously over a single connection.
+2. **Out-of-order delivery**: Allowing packets to be processed as they arrive, rather than waiting for earlier packets.
+3. **Prioritization**: Implementing Quality of Service (QoS) to prioritize certain types of traffic.
+4. **Buffering**: Using larger buffers to accommodate delays and reduce the impact of HOL blocking. 
+
+**Summary**: Head-of-line blocking occurs when the first packet in a queue delays the processing of subsequent packets, leading to performance issues that can be mitigated through various techniques.
+</details>
+
+<details>
+<summary>Explain REST vs RPC. </summary>
+
+**REST (Representational State Transfer)**:
+- Architectural style for designing networked applications
+- Uses standard HTTP methods (GET, POST, PUT, DELETE)
+- Stateless communication
+- Resource-based, with each resource identified by a unique URL
+- Data is typically exchanged in JSON or XML format
+
+**RPC (Remote Procedure Call)**:
+- Protocol for executing procedures on remote systems
+- Can use various transport protocols (e.g., HTTP, TCP)
+- Can be stateful or stateless
+- Function-based, where clients call functions or methods on the server
+- Data can be exchanged in various formats (e.g., JSON, XML, binary)
+
+**Use Cases**:
+- REST: Web services, APIs for web applications
+- RPC: Microservices, distributed systems, internal service communication
+
+**Summary**: REST is resource-oriented and uses standard HTTP methods, while RPC is function-oriented and can use various transport protocols. Both have their own use cases depending on application requirements.
+
+</details>
+
+<details>
+<summary>What is idempotency in network APIs?</summary>
+
+**Idempotency** in network APIs refers to the property of certain operations where performing the same operation multiple times has the same effect as performing it once. In other words, an idempotent operation can be repeated without changing the result beyond the initial application.
+
+Idempotent HTTP methods include: (GET, PUT, DELETE, HEAD, OPTIONS)
+
+Non-idempotent HTTP methods include: (POST, PATCH)
+
+Idempotency is important in network APIs to ensure reliability and consistency, especially in scenarios where network failures or retries may occur. It helps prevent unintended side effects, such as duplicate resource creation or data corruption, when clients resend requests.
+
+**Summary**: Idempotency ensures that repeated operations yield the same result, enhancing reliability and consistency in network APIs.
+</details>
