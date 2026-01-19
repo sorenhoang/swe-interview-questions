@@ -512,6 +512,7 @@ Page faults can be classified into two types:
 - The CPU changes from user mode to kernel mode to handle requests that require higher privileges.
 
 **Importance:**
+y
 
 - Separates user applications from critical system operations, enhancing security and stability.
 - Prevents user applications from directly accessing hardware or sensitive data.
@@ -530,4 +531,66 @@ A **system call** is a mechanism that allows user-mode applications to request s
 6. **Resume Execution**: The application resumes execution from the point where the system call was made.
 
 System calls provide a controlled interface for user applications to interact with the operating system while maintaining security and stability.
+
+</details>
+
+<details>
+
+<summary>Explain memory fragmentation.</summary>
+
+**Memory fragmentation** refers to the condition where free memory is divided into small, non-contiguous blocks, making it difficult to allocate large contiguous memory segments even when there is enough total free memory available.
+
+**Types of Fragmentation:**
+
+- **External Fragmentation**: Occurs when free memory is scattered in small blocks between allocated memory segments. This can prevent the allocation of large contiguous memory blocks.
+- **Internal Fragmentation**: Happens when allocated memory blocks are larger than the requested memory, leading to wasted space within the allocated blocks.
+
+**Causes of Fragmentation:**
+
+- Dynamic memory allocation and deallocation.
+- Varying sizes of memory requests.
+
+**Consequences:**
+
+- Reduced memory utilization.
+- Increased allocation time.
+- Potential application failures due to inability to allocate memory.
+
+**Mitigation Strategies:**
+
+- Memory compaction: Rearranging memory to consolidate free space.
+- Using memory allocation algorithms that minimize fragmentation (e.g., best-fit, buddy system).
+- Employing garbage collection techniques in managed environments.
+</details>
+
+<details>
+
+<summary>What is copy-on-write? </summary>
+
+**Copy-On-Write (COW)** is an optimization technique used in computer programming and operating systems to efficiently manage memory. When multiple processes share the same data, COW allows them to share the same physical memory pages until one of the processes attempts to modify the data. At that point, a separate copy of the data is created for the modifying process, ensuring that changes do not affect the original data or other processes.
+
+**How Copy-On-Write Works:**
+
+- When a process requests a copy of a resource (like memory), the OS provides a reference to the same physical memory instead of duplicating it.
+- The memory pages are marked as read-only.
+- If a process tries to write to a shared page, a page fault occurs.
+- The OS then creates a private copy of the page for that process, allowing it to modify its own copy without affecting others.
+
+**Benefits of Copy-On-Write:**
+
+- Memory Efficiency: Reduces memory usage by sharing pages until modification is necessary.
+- Performance Improvement: Avoids unnecessary copying of data, speeding up process creation and resource allocation.
+- Simplified Resource Management: Easier to manage shared resources without complex synchronization.
+</details>
+
+<details>
+<summary>How does garbage collection work at OS/runtime level? </summary>
+
+Garbage collection (GC) is a memory management technique used by programming languages and runtime environments to automatically reclaim memory that is no longer in use by the program. At the OS/runtime level, garbage collection works through several key steps:
+1. **Object Allocation**: When a program creates objects, memory is allocated from the heap. The runtime keeps track of these allocations.
+2. **Reachability Analysis**: The garbage collector periodically identifies which objects are still reachable from the root set (e.g., global variables, stack variables). Objects that are not reachable are considered garbage.
+3. **Marking Phase**: The garbage collector traverses the object graph starting from the root set and marks all reachable objects.
+4. **Sweeping Phase**: The garbage collector scans the heap and reclaims memory occupied by unmarked (unreachable) objects.
+5. **Compaction (Optional)**: Some garbage collectors also compact the heap by moving live objects together, reducing fragmentation and improving allocation efficiency.
+
 </details>
