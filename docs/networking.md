@@ -350,3 +350,141 @@ Socket lifecycle includes:
 **Summary**: A socket is a communication endpoint that enables data exchange between applications over a network using various protocols.
 
 </details>
+
+<details>
+<summary>What is head-of-line blocking? </summary>
+
+**Head-of-line (HOL) blocking** is a performance-limiting phenomenon that occurs in networking and computer systems when a line of packets or data units is held up by the first packet in the queue. This means that if the first packet is delayed or lost, all subsequent packets must wait, even if they could be processed independently. HOL blocking can lead to increased latency and reduced throughput, especially in protocols like TCP, where packets must be processed in order.
+HOL blocking can be mitigated through techniques such as:
+1. **Multiplexing**: Using protocols like HTTP/2 or QUIC that allow multiple streams of data to be sent simultaneously over a single connection.
+2. **Out-of-order delivery**: Allowing packets to be processed as they arrive, rather than waiting for earlier packets.
+3. **Prioritization**: Implementing Quality of Service (QoS) to prioritize certain types of traffic.
+4. **Buffering**: Using larger buffers to accommodate delays and reduce the impact of HOL blocking. 
+
+**Summary**: Head-of-line blocking occurs when the first packet in a queue delays the processing of subsequent packets, leading to performance issues that can be mitigated through various techniques.
+</details>
+
+<details>
+<summary>Explain REST vs RPC. </summary>
+
+**REST (Representational State Transfer)**:
+- Architectural style for designing networked applications
+- Uses standard HTTP methods (GET, POST, PUT, DELETE)
+- Stateless communication
+- Resource-based, with each resource identified by a unique URL
+- Data is typically exchanged in JSON or XML format
+
+**RPC (Remote Procedure Call)**:
+- Protocol for executing procedures on remote systems
+- Can use various transport protocols (e.g., HTTP, TCP)
+- Can be stateful or stateless
+- Function-based, where clients call functions or methods on the server
+- Data can be exchanged in various formats (e.g., JSON, XML, binary)
+
+**Use Cases**:
+- REST: Web services, APIs for web applications
+- RPC: Microservices, distributed systems, internal service communication
+
+**Summary**: REST is resource-oriented and uses standard HTTP methods, while RPC is function-oriented and can use various transport protocols. Both have their own use cases depending on application requirements.
+
+</details>
+
+<details>
+<summary>What is idempotency in network APIs?</summary>
+
+**Idempotency** in network APIs refers to the property of certain operations where performing the same operation multiple times has the same effect as performing it once. In other words, an idempotent operation can be repeated without changing the result beyond the initial application.
+
+Idempotent HTTP methods include: (GET, PUT, DELETE, HEAD, OPTIONS)
+
+Non-idempotent HTTP methods include: (POST, PATCH)
+
+Idempotency is important in network APIs to ensure reliability and consistency, especially in scenarios where network failures or retries may occur. It helps prevent unintended side effects, such as duplicate resource creation or data corruption, when clients resend requests.
+
+**Summary**: Idempotency ensures that repeated operations yield the same result, enhancing reliability and consistency in network APIs.
+</details>
+
+<details>
+<summary>What is HTTPS and how TLS works? </summary>
+
+**HTTPS (Hypertext Transfer Protocol Secure)** is an extension of HTTP that uses TLS (Transport Layer Security) to encrypt data transmitted between a client (e.g., web browser) and a server. This ensures confidentiality, integrity, and authenticity of the data exchanged.
+
+**How TLS Works**:
+1. **Handshake**: The client and server perform a TLS handshake to establish a secure connection. During this process, they agree on encryption algorithms and exchange cryptographic keys.
+2. **Certificate Exchange**: The server presents its digital certificate, issued by a trusted Certificate Authority (CA), to the client for authentication.
+3. **Session Key Generation**: Both parties generate a shared session key using asymmetric encryption (e.g., RSA, Diffie-Hellman) for secure communication.
+4. **Data Encryption**: Once the session key is established, all data transmitted between the client and server is encrypted using symmetric encryption (e.g., AES).
+5. **Integrity Check**: TLS also provides data integrity through message authentication codes (MACs) to ensure that data has not been tampered with during transmission.
+
+**Summary**: HTTPS uses TLS to secure data transmission by encrypting communication, authenticating the server, and ensuring data integrity.
+</details>
+
+<details>
+<summary>What is buffer? why we always need buffer when working with "file"?</summary>
+
+A **buffer** is a temporary storage area in memory that holds data while it is being transferred between two locations, such as between a file and an application or between different components of a system. Buffers help manage differences in data processing speeds and improve overall performance by allowing data to be read or written in larger chunks rather than one byte at a time.
+
+When working with files, buffers are essential for several reasons:
+1. **Efficiency**: Reading or writing data in larger blocks reduces the number of I/O operations, which are typically slow and resource-intensive. This leads to better performance and reduced latency.
+2. **Smooth Data Flow**: Buffers help accommodate variations in data processing speeds between the application and the file system, preventing bottlenecks and ensuring a steady flow of data.
+3. **Reduced System Calls**: By using buffers, the number of system calls to read or write data is minimized, which can significantly improve performance, especially for large files.
+4. **Data Integrity**: Buffers can help ensure that data is correctly formatted and complete before being written to a file, reducing the risk of corruption.
+
+**Summary**: Buffers improve file I/O efficiency, smooth data flow, reduce system calls, and help maintain data integrity.
+</details>
+
+<details>
+<summary>What is unix socket? When to use it?</summary>
+
+A **Unix socket** (also known as a Unix domain socket or IPC socket) is a communication endpoint used for inter-process communication (IPC) on the same host operating system. Unlike network sockets that use IP addresses and ports for communication over a network, Unix sockets use file system paths to identify the communication endpoints.
+Unix sockets are typically used in scenarios where high-performance communication between processes on the same machine is required, such as:
+1. **Local Inter-Process Communication**: When two or more processes running on the same machine need to exchange data efficiently.
+2. **Database Connections**: Many database systems (e.g., PostgreSQL, MySQL) use Unix sockets for local connections to improve performance.
+3. **Microservices**: When microservices are deployed on the same host and need to communicate with each other.
+4. **System Services**: Operating system services and daemons often use Unix sockets for communication with client applications.
+5. **Performance-Critical Applications**: Applications that require low-latency communication can benefit from the reduced overhead of Unix sockets compared to network sockets.
+6. **Security**: Unix sockets can provide better security for local communication since they are not exposed to the network.
+**Summary**: Unix sockets facilitate efficient inter-process communication on the same host, making them ideal for local IPC, database connections, microservices, system services, and performance-critical applications.
+
+</details>
+
+<details>
+<summary>What is TCP proxy? reverse proxy? and VPN?</summary>
+
+**TCP Proxy**: A TCP proxy is an intermediary server that forwards TCP traffic between clients and servers. It listens for incoming TCP connections from clients and relays the data to the appropriate backend server. TCP proxies are often used for load balancing, traffic filtering, and improving security by hiding the backend servers' details.
+**Reverse Proxy**: A reverse proxy is a type of proxy server that sits in front of one or more backend servers and forwards client requests to those servers. It acts as an intermediary for requests from clients seeking resources from the backend servers. Reverse proxies are commonly used for load balancing, caching, SSL termination, and enhancing security by hiding the backend infrastructure.
+**VPN (Virtual Private Network)**: A VPN is a technology that creates a secure and encrypted connection over a public network, such as the internet. It allows users to send and receive data as if their devices were directly connected to a private network. VPNs are commonly used for secure remote access, protecting sensitive data, and bypassing geo-restrictions.
+
+**Use Cases**:
+- TCP Proxy: Load balancing, traffic filtering, security enhancement
+- Reverse Proxy: Load balancing, caching, SSL termination, security enhancement
+- VPN: Secure remote access, data protection, geo-restriction bypass
+
+**Summary**: A TCP proxy forwards TCP traffic, a reverse proxy forwards client requests to backend servers, and a VPN creates a secure connection over a public network.
+
+</details>
+
+<details>
+
+<summary>How your router at your home works?</summary>
+
+A home router functions as a central hub that connects your local network (LAN) to the internet (WAN). It performs several key functions:
+1. **Routing**: The router directs data packets between devices on your local network and the internet, ensuring that data reaches the correct destination.
+2. **NAT (Network Address Translation)**: The router translates private IP addresses used within your home network to a single public IP address for internet communication, allowing multiple devices to share one internet connection.
+3. **DHCP (Dynamic Host Configuration Protocol)**: The router assigns IP addresses to devices on your local network automatically, simplifying network configuration.
+4. **Firewall**: The router provides basic security by filtering incoming and outgoing traffic, protecting your network from unauthorized access.
+5. **Wi-Fi Access Point**: Most home routers include a built-in Wi-Fi access point, allowing wireless devices to connect to the network.
+6. **Port Forwarding**: The router can be configured to forward specific types of incoming traffic to designated devices on the local network, enabling services like gaming or remote desktop access.
+
+</details>
+
+<details>
+
+<summary>Inside LAN network, it uses IP or MAC address? Why?</summary>
+
+Inside a LAN (Local Area Network), both IP addresses and MAC (Media Access Control) addresses are used, but they serve different purposes.
+- **MAC Address**: MAC addresses are used for communication at the data link layer (Layer 2) of the OSI model. They are unique identifiers assigned to network interfaces for physical devices. When devices communicate within a LAN, they use MAC addresses to identify each other on the local network segment.
+- **IP Address**: IP addresses are used for communication at the network layer (Layer 3) of the OSI model. They provide logical addressing and are used to route packets between different networks. Within a LAN, devices use IP addresses to identify each other and facilitate communication across the network.
+When a device wants to send data to another device within the same LAN, it first uses the IP address to determine the destination. Then, it uses the Address Resolution Protocol (ARP) to map the IP address to the corresponding MAC address for actual data transmission.
+
+**Summary**: Inside a LAN, MAC addresses are used for local communication at the data link layer, while IP addresses are used for logical addressing and routing at the network layer.
+</details>
