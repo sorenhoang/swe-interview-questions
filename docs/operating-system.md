@@ -594,3 +594,22 @@ Garbage collection (GC) is a memory management technique used by programming lan
 5. **Compaction (Optional)**: Some garbage collectors also compact the heap by moving live objects together, reducing fragmentation and improving allocation efficiency.
 
 </details>
+
+<details>
+
+<summary>What causes stack overflow?</summary>
+
+A **stack overflow** occurs when a program uses more stack memory than is allocated for it, leading to the corruption of adjacent memory or program crashes. 
+
+Common causes of stack overflow include:
+- Deep or infinite recursion: A function that calls itself too many times without a base case.
+- Excessive local variable allocation: Declaring large arrays or data structures as local variables within functions.
+- Large function call chains: A series of nested function calls that consume significant stack space. 
+- Improper use of pointers: Dereferencing invalid pointers that lead to stack corruption.
+
+To prevent stack overflow, developers can:
+- Limit recursion depth and ensure base cases are defined.  
+- Use heap memory for large data structures instead of stack memory.
+- Monitor stack usage and adjust stack size if necessary.
+
+</details>
