@@ -587,6 +587,7 @@ System calls provide a controlled interface for user applications to interact wi
 <summary>How does garbage collection work at OS/runtime level? </summary>
 
 Garbage collection (GC) is a memory management technique used by programming languages and runtime environments to automatically reclaim memory that is no longer in use by the program. At the OS/runtime level, garbage collection works through several key steps:
+
 1. **Object Allocation**: When a program creates objects, memory is allocated from the heap. The runtime keeps track of these allocations.
 2. **Reachability Analysis**: The garbage collector periodically identifies which objects are still reachable from the root set (e.g., global variables, stack variables). Objects that are not reachable are considered garbage.
 3. **Marking Phase**: The garbage collector traverses the object graph starting from the root set and marks all reachable objects.
@@ -599,16 +600,18 @@ Garbage collection (GC) is a memory management technique used by programming lan
 
 <summary>What causes stack overflow?</summary>
 
-A **stack overflow** occurs when a program uses more stack memory than is allocated for it, leading to the corruption of adjacent memory or program crashes. 
+A **stack overflow** occurs when a program uses more stack memory than is allocated for it, leading to the corruption of adjacent memory or program crashes.
 
 Common causes of stack overflow include:
+
 - Deep or infinite recursion: A function that calls itself too many times without a base case.
 - Excessive local variable allocation: Declaring large arrays or data structures as local variables within functions.
-- Large function call chains: A series of nested function calls that consume significant stack space. 
+- Large function call chains: A series of nested function calls that consume significant stack space.
 - Improper use of pointers: Dereferencing invalid pointers that lead to stack corruption.
 
 To prevent stack overflow, developers can:
-- Limit recursion depth and ensure base cases are defined.  
+
+- Limit recursion depth and ensure base cases are defined.
 - Use heap memory for large data structures instead of stack memory.
 - Monitor stack usage and adjust stack size if necessary.
 
@@ -618,7 +621,8 @@ To prevent stack overflow, developers can:
 <summary>How does deallocation work?</summary>
 
 Deallocation is the process of releasing memory that was previously allocated to a program, making it available for future use. The method of deallocation depends on whether the memory was allocated on the stack or the heap.
-- **Stack Deallocation**: 
+
+- **Stack Deallocation**:
   - Stack memory is automatically deallocated when a function call ends. The stack pointer is adjusted to remove the function's local variables from the stack.
 - **Heap Deallocation**:
   - Heap memory must be explicitly deallocated by the programmer using functions like `free()` in C/C++ or by the garbage collector in managed languages like Java or Python.
@@ -626,6 +630,7 @@ Deallocation is the process of releasing memory that was previously allocated to
   - In garbage-collected environments, the runtime periodically identifies and reclaims memory that is no longer reachable by the program.
 
 Proper deallocation is crucial for efficient memory management and preventing resource exhaustion.
+
 </details>
 
 <details>
@@ -633,12 +638,14 @@ Proper deallocation is crucial for efficient memory management and preventing re
 <summary>What happens when your computer is full of memory</summary>
 
 When your computer's memory (RAM) is full, several things can happen:
+
 1. **Performance Degradation**: The system may slow down significantly as it struggles to manage memory resources.
 2. **Increased Paging/Swapping**: The operating system may start using disk space (swap space) to compensate for the lack of RAM, leading to increased disk I/O and further performance issues.
 3. **Application Crashes**: Programs may crash or fail to start if they cannot allocate the memory they need.
 4. **System Instability**: The overall system may become unstable, leading to freezes or crashes.
 
 To mitigate these issues, users can close unnecessary applications, increase physical RAM, or optimize memory usage through system settings or third-party tools.
+
 </details>
 
 <details>
@@ -646,18 +653,35 @@ To mitigate these issues, users can close unnecessary applications, increase phy
 <summary>What is the difference between preemptive and non-preemptive scheduling?</summary>
 
 **Preemptive Scheduling:**
+
 - The operating system can interrupt and suspend a running process to allocate CPU time to another process.
 - Allows for better responsiveness and multitasking.
 - Examples: Round Robin, Priority Scheduling.
 
 **Non-Preemptive Scheduling:**
+
 - A running process continues until it voluntarily yields the CPU, either by terminating or waiting for I/O.
-- Simpler to implement but can lead to poor responsiveness. 
+- Simpler to implement but can lead to poor responsiveness.
 - Examples: First-Come, First-Served (FCFS), Shortest Job Next (SJN).
 
 **Key Differences:**
+
 - Control: Preemptive allows the OS to control CPU allocation, while non-preemptive relies on process cooperation.
 - Responsiveness: Preemptive is more responsive to high-priority tasks.
 - Complexity: Preemptive scheduling is more complex to implement due to context switching.
 </details>
 
+<details>
+
+<summary>Why in Linux everything is "file"?</summary>
+
+In Linux, the philosophy of "everything is a file" means that various system resources, including hardware devices, inter-process communication channels, and even system information, are represented as files in the filesystem. This design choice provides several benefits:
+
+1. **Uniform Interface**: By treating everything as a file, Linux provides a consistent way to interact with different types of resources using standard file operations (open, read, write, close).
+2. **Simplicity**: This abstraction simplifies the programming model, as developers can use familiar file I/O functions to work with diverse resources.
+3. **Flexibility**: It allows for easy redirection and piping of data between processes, as data can be read from or written to files seamlessly.
+4. **Extensibility**: New types of resources can be added to the system without changing the underlying interface, as long as they can be represented as files.
+
+Overall, this design philosophy contributes to the modularity and versatility of the Linux operating system.
+
+</details>
