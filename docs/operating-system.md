@@ -613,3 +613,51 @@ To prevent stack overflow, developers can:
 - Monitor stack usage and adjust stack size if necessary.
 
 </details>
+
+<details>
+<summary>How does deallocation work?</summary>
+
+Deallocation is the process of releasing memory that was previously allocated to a program, making it available for future use. The method of deallocation depends on whether the memory was allocated on the stack or the heap.
+- **Stack Deallocation**: 
+  - Stack memory is automatically deallocated when a function call ends. The stack pointer is adjusted to remove the function's local variables from the stack.
+- **Heap Deallocation**:
+  - Heap memory must be explicitly deallocated by the programmer using functions like `free()` in C/C++ or by the garbage collector in managed languages like Java or Python.
+  - In manual memory management, failing to deallocate heap memory can lead to memory leaks.
+  - In garbage-collected environments, the runtime periodically identifies and reclaims memory that is no longer reachable by the program.
+
+Proper deallocation is crucial for efficient memory management and preventing resource exhaustion.
+</details>
+
+<details>
+
+<summary>What happens when your computer is full of memory</summary>
+
+When your computer's memory (RAM) is full, several things can happen:
+1. **Performance Degradation**: The system may slow down significantly as it struggles to manage memory resources.
+2. **Increased Paging/Swapping**: The operating system may start using disk space (swap space) to compensate for the lack of RAM, leading to increased disk I/O and further performance issues.
+3. **Application Crashes**: Programs may crash or fail to start if they cannot allocate the memory they need.
+4. **System Instability**: The overall system may become unstable, leading to freezes or crashes.
+
+To mitigate these issues, users can close unnecessary applications, increase physical RAM, or optimize memory usage through system settings or third-party tools.
+</details>
+
+<details>
+
+<summary>What is the difference between preemptive and non-preemptive scheduling?</summary>
+
+**Preemptive Scheduling:**
+- The operating system can interrupt and suspend a running process to allocate CPU time to another process.
+- Allows for better responsiveness and multitasking.
+- Examples: Round Robin, Priority Scheduling.
+
+**Non-Preemptive Scheduling:**
+- A running process continues until it voluntarily yields the CPU, either by terminating or waiting for I/O.
+- Simpler to implement but can lead to poor responsiveness. 
+- Examples: First-Come, First-Served (FCFS), Shortest Job Next (SJN).
+
+**Key Differences:**
+- Control: Preemptive allows the OS to control CPU allocation, while non-preemptive relies on process cooperation.
+- Responsiveness: Preemptive is more responsive to high-priority tasks.
+- Complexity: Preemptive scheduling is more complex to implement due to context switching.
+</details>
+
