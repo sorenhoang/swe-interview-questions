@@ -685,3 +685,75 @@ In Linux, the philosophy of "everything is a file" means that various system res
 Overall, this design philosophy contributes to the modularity and versatility of the Linux operating system.
 
 </details>
+
+<details>
+
+<summary>What is file descriptor?</summary>
+
+A **file descriptor** is a unique integer identifier assigned by the operating system to represent an open file or input/output resource, such as files, sockets, or pipes. It serves as a handle that allows programs to perform operations like reading, writing, or closing the resource.
+
+Common characteristics of file descriptors:
+
+- Standard File Descriptors: In Unix-like systems, standard file descriptors are predefined:
+  - 0: Standard Input (stdin)
+  - 1: Standard Output (stdout)
+  - 2: Standard Error (stderr)
+
+Resource Management: File descriptors help the OS manage and track open resources for each process.
+
+System Calls: Functions like `open()`, `read()`, `write()`, and `close()` use file descriptors to perform operations on files and I/O resources.
+
+</details>
+
+<details>
+<summary>What is buffer? Why do we need buffer?</summary>
+
+A **buffer** is a temporary storage area in memory used to hold data while it is being transferred between two locations, such as between a program and a hardware device or between different parts of a program.
+
+**Why Buffers are Needed:**
+
+- **Speed Mismatch**: Buffers help accommodate differences in speed between producers and consumers of data (e.g., a fast CPU and a slow disk).
+- **Data Integrity**: They help ensure that data is not lost or corrupted during transfer.
+- **Efficiency**: Buffers allow for batch processing of data, reducing the number of I/O operations and improving overall performance.
+- **Smoothing**: Buffers can smooth out bursts of data, preventing overflow or underflow conditions.
+</details>
+
+<details>
+
+<summary>What will happen if 2 processes read/write to the same file?</summary>
+
+If two processes read from or write to the same file simultaneously without proper synchronization, several issues can arise:
+
+- **Data Corruption**: Concurrent writes can overwrite each other's data, leading to inconsistent or corrupted file contents
+- **Race Conditions**: The outcome of read/write operations may depend on the timing of the processes, leading to unpredictable results.
+- **File Locking Issues**: Without file locks, processes may not be aware of each other's operations, causing conflicts.
+
+To prevent these issues, mechanisms such as file locks (advisory or mandatory), semaphores, and other synchronization techniques are used to coordinate access to the file.
+
+</details>
+
+<details>
+<summary>What is user space and kernel space?</summary>
+
+**User Space:**
+
+- The memory area where user applications run.
+- Limited access to system resources and hardware.
+- If a user-space application needs to perform privileged operations, it must make a system call to switch to kernel space.
+
+**Kernel Space:**
+
+- The memory area where the operating system kernel operates.
+- Full access to all system resources and hardware.
+- Can execute any CPU instruction and access any memory address.
+
+**Switching Between Spaces:**
+
+- Mode switching occurs via system calls, interrupts, or exceptions.
+- The CPU changes from user space to kernel space to handle requests that require higher privileges.
+
+**Importance:**
+
+- Separates user applications from critical system operations, enhancing security and stability.
+- Prevents user applications from directly accessing hardware or sensitive data.
+</details>
