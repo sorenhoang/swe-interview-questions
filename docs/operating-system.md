@@ -757,3 +757,43 @@ To prevent these issues, mechanisms such as file locks (advisory or mandatory), 
 - Separates user applications from critical system operations, enhancing security and stability.
 - Prevents user applications from directly accessing hardware or sensitive data.
 </details>
+
+<details>
+<summary>What is false sharing?</summary>
+
+**False sharing** is a performance-degrading phenomenon that occurs in multi-threaded applications when threads on different processors modify variables that reside on the same cache line. Even though the threads are working on separate variables, the cache coherence protocol treats the entire cache line as a single unit, leading to unnecessary invalidation and synchronization overhead.
+
+</details>
+
+<details>
+
+<summary>What is Spatial Locality?</summary>
+
+**Spatial locality** is a principle in computer memory management that refers to the tendency of programs to access data locations that are close to each other within a short time frame. When a program accesses a particular memory address, it is likely to access nearby addresses soon after.
+
+**Importance of Spatial Locality:**
+
+- Improves Cache Performance: Caches are designed to take advantage of spatial locality by loading entire blocks of contiguous memory into the cache, reducing the number of memory accesses.
+- Enhances Memory Access Speed: By accessing nearby memory locations, programs can benefit from faster access times due to reduced cache misses.
+- Optimizes Data Structures: Data structures like arrays and matrices are designed to leverage spatial locality for efficient access patterns.
+
+**Examples of Spatial Locality:**
+
+- Iterating through an array sequentially.
+- Accessing fields of a structure stored in contiguous memory.
+</details>
+
+<details>
+<summary>what is The "Strumming" Problem?</summary>
+
+The "Strumming" Problem refers to a specific type of performance issue that arises in multi-threaded applications due to false sharing. It occurs when multiple threads frequently modify variables that are located close together in memory, leading to excessive cache coherence traffic and performance degradation.
+
+When one thread modifies a variable, the entire cache line containing that variable is invalidated in other processors' caches, even if those processors are working on different variables within the same cache line. This results in a situation where threads are "strumming" the cache line back and forth, causing delays and reducing overall performance.
+
+To mitigate the strumming problem, developers can:
+
+- Pad data structures to ensure that frequently modified variables are placed on separate cache lines.
+- Use alignment directives to control the placement of variables in memory.
+- Redesign data access patterns to minimize contention on shared cache lines.
+
+</details>
