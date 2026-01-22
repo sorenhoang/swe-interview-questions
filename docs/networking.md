@@ -557,6 +557,7 @@ HTTPS is generally "**slower**" than HTTP due to the additional overhead introdu
 3. **Certificate Validation**: During the TLS handshake, the client must validate the server's digital certificate, which may involve checking the certificate's authenticity and revocation status. This validation process can add further delays.
 
 **Summary**: HTTPS is slower than HTTP due to the TLS handshake, encryption/decryption processes, and certificate validation, all of which introduce additional latency.
+
 </details>
 
 <details>
@@ -568,6 +569,7 @@ HTTPS is generally "**slower**" than HTTP due to the additional overhead introdu
 **Versioning**: Versioning is the practice of assigning unique identifiers (versions) to different iterations of a resource, such as files, APIs, or software. In the context of web development and CDNs, versioning helps manage changes to resources by allowing multiple versions to coexist. This enables developers to update content without disrupting existing users who may still be using an older version. Versioning can be implemented through URL parameters, file naming conventions, or API versioning strategies.
 
 **Summary**: Purge removes outdated cached content, while versioning manages different iterations of resources to ensure users access the correct version.
+
 </details>
 
 <details>
@@ -576,12 +578,14 @@ HTTPS is generally "**slower**" than HTTP due to the additional overhead introdu
 A **firewall** is a network security device or software that monitors and controls incoming and outgoing network traffic based on predetermined security rules. It acts as a barrier between a trusted internal network and untrusted external networks, such as the internet, to prevent unauthorized access and protect against cyber threats.
 
 Firewalls work by inspecting data packets and determining whether to allow or block them based on a set of rules defined by the network administrator. These rules can be based on various criteria, such as IP addresses, port numbers, protocols, and application types. Firewalls can operate at different layers of the OSI model, including:
+
 1. **Packet Filtering**: Examines individual packets and allows or blocks them based on source/destination IP addresses and ports.
 2. **Stateful Inspection**: Tracks the state of active connections and makes decisions based on the context of the traffic.
 3. **Proxy Services**: Acts as an intermediary between clients and servers, filtering requests and responses.
 4. **Next-Generation Firewalls (NGFW)**: Combines traditional firewall capabilities with advanced features like intrusion detection/prevention, application awareness, and deep packet inspection.
 
 **Summary**: A firewall monitors and controls network traffic based on security rules to protect against unauthorized access and cyber threats.
+
 </details>
 
 <details>
@@ -593,6 +597,7 @@ Firewalls work by inspecting data packets and determining whether to allow or bl
 **HTTP Health Check**: An HTTP health check involves sending an HTTP request (usually a GET request) to a specific URL on the target server and evaluating the response. The health check can assess not only the availability of the service but also its functionality by checking the HTTP status code (e.g., 200 OK) and potentially analyzing the response content. HTTP health checks are more comprehensive and suitable for web applications and services that rely on HTTP protocols.
 
 **Summary**: TCP health checks verify service availability through TCP connections, while HTTP health checks assess both availability and functionality using HTTP requests and responses.
+
 </details>
 
 <details>
@@ -601,11 +606,13 @@ Firewalls work by inspecting data packets and determining whether to allow or bl
 A **WebSocket** is a communication protocol that provides full-duplex communication channels over a single TCP connection. It enables real-time, bidirectional communication between a client (e.g., web browser) and a server, allowing data to be sent and received simultaneously without the need for repeated HTTP requests.
 
 **Differences between WebSocket and HTTP**:
+
 1. **Communication Model**: HTTP is a request-response protocol where the client sends a request and waits for a response from the server. WebSocket, on the other hand, allows for continuous, bidirectional communication between the client and server.
 2. **Connection Persistence**: HTTP connections are typically short-lived and closed after each request-response cycle. WebSocket connections are persistent, remaining open for ongoing communication until explicitly closed by either the client or server.
 3. **Overhead**: HTTP has higher overhead due to the need for headers in each request and response. WebSocket has lower overhead after the initial handshake, as it uses a lightweight framing mechanism for data transmission.
 
 **Summary**: WebSocket enables real-time, bidirectional communication with persistent connections, while HTTP follows a request-response model with higher overhead and short-lived connections.
+
 </details>
 
 <details>
@@ -613,7 +620,8 @@ A **WebSocket** is a communication protocol that provides full-duplex communicat
 
 **MQTT (Message Queuing Telemetry Transport)** is a lightweight, publish-subscribe messaging protocol designed for low-bandwidth, high-latency, or unreliable networks. It is commonly used in Internet of Things (IoT) applications for communication between devices and servers.
 
-MQTT works by using a central broker that manages the distribution of messages between clients. The key components of MQTT include: 
+MQTT works by using a central broker that manages the distribution of messages between clients. The key components of MQTT include:
+
 1. **Publisher**: A client that sends messages to a specific topic on the broker.
 2. **Subscriber**: A client that subscribes to a specific topic to receive messages from the broker.
 3. **Broker**: The server that receives messages from publishers and forwards them to subscribers based on their subscriptions.
@@ -624,12 +632,23 @@ When a publisher sends a message to a topic, the broker distributes the message 
 
 </details>
 
-
 <details>
 <summary>What is MTU and how it works?</summary>
 
 **MTU (Maximum Transmission Unit)** is the largest size of a data packet that can be transmitted over a network medium without needing to be fragmented. It is typically measured in bytes and varies depending on the type of network (e.g., Ethernet, Wi-Fi, etc.).
 
 When data is sent over a network, it is broken down into smaller packets. If a packet exceeds the MTU size of the network, it must be fragmented into smaller packets that fit within the MTU limit. Fragmentation can lead to increased overhead and latency, as each fragment requires its own header and must be reassembled at the destination.
+
+</details>
+
+<details>
+
+<summary>TCP Keep-Alive</summary>
+
+**TCP Keep-Alive** is a mechanism used to maintain an active TCP connection by periodically sending small packets of data (keep-alive probes) between the client and server. This helps to prevent the connection from being closed due to inactivity, especially in scenarios where long-lived connections are required, such as in web applications or remote desktop sessions.
+
+When TCP Keep-Alive is enabled, if no data has been exchanged over the connection for a specified period (the keep-alive time), the client sends a keep-alive probe to the server. If the server responds, the connection remains active. If there is no response after a certain number of probes (the keep-alive retry count), the connection is considered dead and is closed.
+
+**Summary**: TCP Keep-Alive maintains active TCP connections by sending periodic probes to prevent disconnection due to inactivity.
 
 </details>
