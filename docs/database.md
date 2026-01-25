@@ -76,3 +76,86 @@ To achieve serializability, the database system may use techniques such as locki
 - Phantom Read: Prevented by Serializable isolation level.
 
 </details>
+
+<details>
+<summary>How does MVCC work?  </summary>
+
+MVCC (Multi-Version Concurrency Control) works by maintaining multiple versions of data items to allow concurrent access without locking. When a transaction begins, it is assigned a unique timestamp. When a transaction reads data, it accesses the version of the data that was committed before its timestamp, ensuring a consistent view of the database.
+
+When a transaction modifies data, instead of overwriting the existing data, MVCC creates a new version of the data item with a new timestamp. This allows other transactions to continue reading the old version while the new version is being created. Once the modifying transaction commits, the new version becomes visible to other transactions that start afterward.
+This approach improves concurrency and performance by allowing readers and writers to operate simultaneously without blocking each other.
+
+</details>
+
+<details>
+
+<summary>What is indexing and why it helps? </summary>
+
+Indexing is a database optimization technique that involves creating data structures (indexes) to improve the speed of data retrieval operations. An index is similar to a book's index, which allows readers to quickly locate specific information without having to read through the entire book.
+
+Indexes help by reducing the amount of data that needs to be scanned during query execution. Instead of searching through every row in a table, the database can use the index to quickly locate the relevant rows, significantly speeding up read operations. However, indexes can also introduce some overhead for write operations, as the index must be updated whenever data is inserted, updated, or deleted.
+
+</details>
+
+<details>
+<summary>what are types of indexing </summary>
+
+There are several types of indexing techniques used in databases to optimize data retrieval:
+
+1. **B-Tree Indexing**: A balanced tree structure that maintains sorted data and allows for efficient insertion, deletion, and search operations. It is widely used in relational databases.
+2. **Hash Indexing**: Uses a hash function to map keys to specific locations in a hash table. It provides fast lookups for equality comparisons but is not suitable for range queries.
+3. **Bitmap Indexing**: Uses bit arrays (bitmaps) to represent the presence or absence of values in a column. It is efficient for columns with low cardinality (few unique values).
+4. **Full-Text Indexing**: Designed for searching large text fields, it allows for efficient searching of words and phrases within text data.
+5. **Spatial Indexing**: Used for geographic data, it allows for efficient querying of spatial relationships, such as proximity and containment.
+6. **Clustered Indexing**: Determines the physical order of data in a table based on the indexed column(s). A table can have only one clustered index.
+7. **Non-Clustered Indexing**: Creates a separate structure from the data table, allowing for multiple non-clustered indexes on a single table.
+8. **Composite Indexing**: An index that includes multiple columns, allowing for efficient querying based on combinations of those columns.
+9. **Unique Indexing**: Ensures that the indexed column(s) contain unique values, preventing duplicate entries in the database.
+
+</details>
+
+<details>
+<summary>WWhat is query execution plan? </summary>
+
+A query execution plan is a detailed roadmap that a database management system (DBMS) creates to execute a SQL query efficiently. It outlines the steps and methods the DBMS will use to retrieve the requested data, including the order of operations, the use of indexes, join methods, and data access paths.
+The execution plan helps optimize query performance by allowing the DBMS to choose the most efficient way to execute the query based on factors such as data distribution, available indexes, and system resources. Database administrators and developers can analyze execution plans to identify performance bottlenecks and optimize queries for better efficiency.
+
+</details>
+
+<details>
+<summary>Explain Database statistics </summary>
+
+Database statistics are metadata that provide information about the distribution and characteristics of data within database tables and indexes. These statistics include details:
+
+- Number of rows in a table
+- Distribution of values in columns
+- Number of distinct values
+- Data density
+- Index usage patterns
+- Histograms for data distribution
+- Average row size
+- Null value counts
+- Page and extent information
+
+Database management systems (DBMS) use these statistics to optimize query execution plans. By analyzing the statistics, the DBMS can make informed decisions about the most efficient way to execute a query, such as which indexes to use, the join order of tables, and the methods for data retrieval. Keeping database statistics up-to-date is crucial for maintaining optimal query performance, as outdated statistics can lead to suboptimal execution plans and slower query response times.
+
+</details>
+
+<details>
+<summary>What is sharding in databases? </summary>
+
+Sharding is a database architecture technique that involves partitioning a large database into smaller, more manageable pieces called shards. Each shard is a separate database instance that contains a subset of the overall data. Sharding is used to improve performance, scalability, and availability of databases by distributing the data across multiple servers or nodes.
+
+Sharding can be done based on various criteria, such as range-based sharding (dividing data based on a specific range of values), hash-based sharding (using a hash function to determine the shard for each data item), or geographic sharding (distributing data based on geographic location). By spreading the data across multiple shards, the database can handle larger volumes of data and higher levels of traffic, while also reducing the load on individual servers.
+</details>
+
+<details>
+<summary>Eplain Sharding vs partitioning</summary>
+
+Sharding and partitioning are both techniques used to divide a database into smaller, more manageable pieces, but they differ in their scope and implementation:
+
+- **Sharding**: Involves distributing data across multiple database instances or servers, with each shard being a separate database that contains a subset of the overall data. Sharding is typically used for horizontal scaling, allowing the database to handle larger volumes of data and higher traffic by spreading the load across multiple machines. Each shard operates independently, and queries may need to be routed to the appropriate shard based on the sharding key.
+- **Partitioning**: Refers to dividing a single database table into smaller, more manageable segments called partitions. Partitioning is usually done within a single database instance and is used to improve query performance and manageability. Partitions can be created based on various criteria, such as range, list, or hash partitioning. Queries can be optimized to access only the relevant partitions, reducing the amount of data that needs to be scanned.
+
+In summary, sharding involves distributing data across multiple database instances for scalability, while partitioning involves dividing a single table within a database for performance optimization.
+</details>
