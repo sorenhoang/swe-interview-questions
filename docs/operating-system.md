@@ -797,3 +797,19 @@ To mitigate the strumming problem, developers can:
 - Redesign data access patterns to minimize contention on shared cache lines.
 
 </details>
+
+<details>
+<summary>What is inode?</summary>
+
+An **inode** (index node) is a data structure used in Unix-like file systems to store metadata about a file or directory. Each inode contains information such as:
+
+- File type (regular file, directory, symbolic link, etc.)
+- Permissions (read, write, execute)
+- Owner and group IDs
+- File size
+- Timestamps (creation, modification, access times)
+- Pointers to the data blocks where the actual file content is stored
+
+Inodes do not store the file name or the actual data; instead, the file name is stored in a directory entry that maps to the corresponding inode. Each file is identified by its inode number, which is unique within a file system.
+
+</details>
