@@ -1,4 +1,5 @@
 <!-- markdownlint-disable MD033 -->
+
 # Database Questions
 
 <details>
@@ -22,7 +23,7 @@ BASE stands for Basically Available, Soft state, Eventual consistency. These pro
 - **Basically Available**: The system guarantees availability, meaning that it will respond to requests, but not necessarily with the most recent data.
 - **Soft state**: The state of the system may change over time, even without input, due to eventual consistency.
 - **Eventual consistency**: The system will eventually become consistent over time, meaning that all replicas will converge to the same value if no new updates are made.
-  
+
 </details>
 
 <details>
@@ -43,6 +44,7 @@ Isolation levels define the degree to which the operations in one transaction ar
 - **Serializable**: The highest isolation level, ensuring complete isolation from other transactions, effectively serializing concurrent transactions.
 
 Each level balances performance and data integrity differently, with higher isolation levels typically resulting in reduced concurrency and increased locking.
+
 </details>
 
 <details>
@@ -51,6 +53,7 @@ Each level balances performance and data integrity differently, with higher isol
 MVCC stands for Multi-Version Concurrency Control. It is a database management technique used to handle concurrent transactions without locking the database rows. MVCC allows multiple versions of a data item to exist simultaneously, enabling readers to access a snapshot of the data without being blocked by writers.
 
 When a transaction modifies data, instead of overwriting the existing data, MVCC creates a new version of the data item. Each transaction sees a consistent snapshot of the database as it was at the start of the transaction. This means that readers can continue to access the old version of the data while writers create new versions, thus improving concurrency and performance.
+
 </details>
 
 <details>
@@ -59,6 +62,7 @@ When a transaction modifies data, instead of overwriting the existing data, MVCC
 Serializable is the highest isolation level in database management systems. It ensures that transactions are executed in such a way that the end result is the same as if the transactions were executed serially, one after the other, without any overlap. This isolation level prevents phenomena such as dirty reads, non-repeatable reads, and phantom reads by ensuring that transactions do not interfere with each other.
 
 To achieve serializability, the database system may use techniques such as locking, timestamp ordering, or optimistic concurrency control. These methods ensure that transactions are executed in a manner that maintains data integrity and consistency, even in a highly concurrent environment.
+
 </details>
 
 <details>
@@ -147,6 +151,7 @@ Database management systems (DBMS) use these statistics to optimize query execut
 Sharding is a database architecture technique that involves partitioning a large database into smaller, more manageable pieces called shards. Each shard is a separate database instance that contains a subset of the overall data. Sharding is used to improve performance, scalability, and availability of databases by distributing the data across multiple servers or nodes.
 
 Sharding can be done based on various criteria, such as range-based sharding (dividing data based on a specific range of values), hash-based sharding (using a hash function to determine the shard for each data item), or geographic sharding (distributing data based on geographic location). By spreading the data across multiple shards, the database can handle larger volumes of data and higher levels of traffic, while also reducing the load on individual servers.
+
 </details>
 
 <details>
@@ -158,4 +163,35 @@ Sharding and partitioning are both techniques used to divide a database into sma
 - **Partitioning**: Refers to dividing a single database table into smaller, more manageable segments called partitions. Partitioning is usually done within a single database instance and is used to improve query performance and manageability. Partitions can be created based on various criteria, such as range, list, or hash partitioning. Queries can be optimized to access only the relevant partitions, reducing the amount of data that needs to be scanned.
 
 In summary, sharding involves distributing data across multiple database instances for scalability, while partitioning involves dividing a single table within a database for performance optimization.
+
+</details>
+
+<details>
+
+<summary>Explain write-ahead logging (WAL). </summary>
+
+Write-Ahead Logging (WAL) is a database management technique used to ensure data integrity and durability in the event of a system crash or failure. In WAL, before any changes are made to the actual database, the intended changes are first recorded in a separate log file called the write-ahead log. This log contains a record of all modifications, including inserts, updates, and deletes. By writing the changes to the log before applying them to the database, WAL ensures that in the event of a crash, the database can be restored to a consistent state by replaying the log entries.
+
+WAL provides several benefits, including improved performance, as it allows for batching of writes to the database, and enhanced recovery capabilities, as the log can be used to reconstruct the database state up to the point of failure. It is widely used in many relational database management systems, such as PostgreSQL and SQLite.
+
+</details>
+
+<details>
+<summary>Explain and Compare OLTP vs OLAP </summary>
+
+OLTP (Online Transaction Processing) and OLAP (Online Analytical Processing) are two different types of database systems designed for different purposes:
+
+- **OLTP**: OLTP systems are designed to handle a large number of short, transactional operations, such as inserting, updating, and deleting records. They are optimized for fast query processing and maintaining data integrity in multi-user environments. OLTP databases are typically used in applications like e-commerce, banking, and customer relationship management (CRM) systems, where real-time data processing is essential.
+
+- **OLAP**: OLAP systems, on the other hand, are designed for complex analytical queries and data analysis. They are optimized for read-heavy operations and support multidimensional data models, allowing users to perform complex calculations, aggregations, and data mining. OLAP databases are commonly used in business intelligence (BI) applications, data warehousing, and reporting systems, where large volumes of historical data need to be analyzed for decision-making purposes.
+
+In summary, OLTP focuses on real-time transaction processing with high concurrency, while OLAP is geared towards complex data analysis and reporting with a focus on read performance.
+
+</details>
+
+<details>
+<summary>What is eventual consistency? </summary>
+
+Eventual consistency is a consistency model used in distributed systems and databases, where it is guaranteed that, given enough time, all replicas of a data item will converge to the same value. In an eventually consistent system, updates to a data item may not be immediately visible to all nodes or replicas, but over time, as changes propagate through the system, all replicas will eventually reflect the most recent update. This model is often used in NoSQL databases and distributed systems to achieve high availability and partition tolerance, allowing for temporary inconsistencies in favor of better performance and scalability.
+
 </details>
