@@ -195,3 +195,40 @@ In summary, OLTP focuses on real-time transaction processing with high concurren
 Eventual consistency is a consistency model used in distributed systems and databases, where it is guaranteed that, given enough time, all replicas of a data item will converge to the same value. In an eventually consistent system, updates to a data item may not be immediately visible to all nodes or replicas, but over time, as changes propagate through the system, all replicas will eventually reflect the most recent update. This model is often used in NoSQL databases and distributed systems to achieve high availability and partition tolerance, allowing for temporary inconsistencies in favor of better performance and scalability.
 
 </details>
+
+<details>
+
+<summary>What is a deadlock in databases? </summary>
+
+A deadlock in databases occurs when two or more transactions are waiting for each other to release locks on resources, resulting in a situation where none of the transactions can proceed. For example, Transaction A holds a lock on Resource 1 and is waiting for a lock on Resource 2, while Transaction B holds a lock on Resource 2 and is waiting for a lock on Resource 1. Since neither transaction can acquire the locks they need, they are stuck in a deadlock.
+
+Deadlocks can lead to performance issues and require the database management system (DBMS) to implement deadlock detection and resolution mechanisms. Common strategies for resolving deadlocks include aborting one of the transactions, rolling back its changes, and allowing the other transaction to proceed. To minimize the occurrence of deadlocks, developers can use techniques such as acquiring locks in a consistent order, using shorter transaction durations, and reducing lock contention.
+
+</details>
+
+<details>
+<summary>What is read/write amplification?  </summary>
+
+Read/write amplification refers to the phenomenon where the amount of data read from or written to storage is significantly larger than the actual amount of data being processed by an application. This can occur in various storage systems, including databases and file systems, and is often a result of underlying data structures, algorithms, or storage media characteristics.
+
+Read amplification occurs when a read operation requires accessing more data than necessary, often due to the way data is organized or indexed. Write amplification happens when a write operation results in multiple writes to the storage medium, such as when updating data requires rewriting entire blocks or pages.
+
+Both read and write amplification can lead to increased latency, reduced performance, and higher wear on storage devices, particularly in solid-state drives (SSDs). To mitigate read/write amplification, techniques such as data compression, efficient data structures, and optimized algorithms can be employed.
+
+</details>
+
+<details>
+
+<summary>When should you denormalize data? </summary>
+
+Denormalization is the process of intentionally introducing redundancy into a database by combining tables or adding redundant data to improve read performance. You should consider denormalizing data in the following scenarios:
+
+1. **Performance Optimization**: When read operations are significantly more frequent than write operations, denormalization can reduce the number of joins required to retrieve data, leading to faster query performance.
+2. **Complex Queries**: If your application frequently executes complex queries that involve multiple joins, denormalization can simplify these queries and improve their execution time.
+3. **Reporting and Analytics**: In data warehousing or OLAP systems, denormalization can help optimize data retrieval for reporting and analytical purposes.
+4. **Caching**: When you need to cache frequently accessed data, denormalization can help reduce the number of database calls required to fetch the data.
+5. **Read-Heavy Workloads**: In scenarios where the workload is predominantly read-heavy, denormalization can help improve overall system performance.
+
+However, it's important to weigh the benefits of denormalization against the potential drawbacks, such as increased storage requirements, data inconsistency risks, and more complex data maintenance. Denormalization should be approached carefully and typically after thorough analysis and testing.
+
+</details>
