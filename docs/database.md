@@ -232,3 +232,103 @@ Denormalization is the process of intentionally introducing redundancy into a da
 However, it's important to weigh the benefits of denormalization against the potential drawbacks, such as increased storage requirements, data inconsistency risks, and more complex data maintenance. Denormalization should be approached carefully and typically after thorough analysis and testing.
 
 </details>
+
+<details>
+
+<summary>What is SQL injection? How to avoid it? </summary>
+
+SQL injection is a security vulnerability that occurs when an attacker is able to manipulate a SQL query by injecting malicious SQL code into input fields or parameters. This can lead to unauthorized access to the database, data leakage, data corruption, or even complete control over the database server.
+
+To avoid SQL injection, consider the following best practices:
+
+1. **Use Prepared Statements**: Utilize parameterized queries or prepared statements, which separate SQL code from data, preventing attackers from altering the query structure.
+2. **Input Validation**: Validate and sanitize all user inputs to ensure they conform to expected formats and types.
+3. **Least Privilege Principle**: Limit database user permissions to only what is necessary for the application to function, reducing the potential impact of an injection attack.
+4. **Stored Procedures**: Use stored procedures for database operations, as they can help encapsulate SQL logic and reduce the risk of injection.
+5. **Web Application Firewalls (WAFs)**: Implement WAFs to detect and block SQL injection attempts.
+
+</details>
+
+<details>
+<summary>Can you reuse the compiled query multiple times? (does it help to speed up your application?) </summary>
+
+Yes, you can reuse compiled queries multiple times, and doing so can help speed up your application. When a query is compiled, the database management system (DBMS) creates an execution plan that outlines how to retrieve the requested data. By reusing the compiled query, the DBMS can skip the compilation step for subsequent executions of the same query, which saves time and resources. This is particularly beneficial for applications that execute the same queries frequently, as it reduces the overhead associated with query parsing and optimization, leading to improved performance and faster response times.
+
+</details>
+
+<details>
+<summary>How composite indexing works?</summary>
+
+Composite indexing involves creating an index that includes multiple columns from a database table. This type of index is useful for optimizing queries that filter or sort data based on more than one column. When a composite index is created, the database management system (DBMS) organizes the index entries based on the combined values of the specified columns.
+
+When a query is executed that uses the composite index, the DBMS can quickly locate the relevant rows by searching through the index using the values of the indexed columns. The order of the columns in the composite index is important, as it affects how efficiently the index can be used for different types of queries. For example, if a composite index is created on columns (A, B), it can efficiently support queries that filter on column A alone or on both columns A and B, but it may not be as effective for queries that filter only on column B.
+
+</details>
+
+<details>
+<summary> How to write query to avoid full table scan? </summary>
+
+To avoid a full table scan in your SQL queries, you can follow these best practices:
+
+1. **Use Indexes**: Ensure that appropriate indexes are created on the columns used in the WHERE clause, JOIN conditions, and ORDER BY clauses.
+2. **Selective Filtering**: Use highly selective conditions in the WHERE clause to reduce the number of rows scanned.
+3. **Avoid Functions on Indexed Columns**: Refrain from using functions or calculations on indexed columns in the WHERE clause, as this can prevent the use of the index.
+4. **Limit Result Set**: Use the LIMIT clause to restrict the number of rows returned by the query.
+5. **Use EXISTS Instead of IN**: When checking for the existence of rows, use the EXISTS clause instead of IN, as it can be more efficient.
+6. **Avoid Wildcards at the Beginning**: When using the LIKE operator, avoid starting the pattern with a wildcard (e.g., '%value'), as this can lead to a full table scan.
+7. **Analyze Execution Plans**: Regularly review the query execution plans to identify and optimize queries that result in full table scans.
+
+By following these practices, you can help ensure that your queries are optimized to use indexes effectively and avoid unnecessary full table scans.
+
+</details>
+
+<details>
+<summary>Explain join algorithms in database engine </summary>
+
+Database engines use various join algorithms to combine rows from two or more tables based on a related column. The most common join algorithms include:
+
+1. **Nested Loop Join**: This algorithm iterates through each row of the outer table and, for each row, scans the entire inner table to find matching rows. It is simple but can be inefficient for large datasets.
+2. **Merge Join**: This algorithm requires both input tables to be sorted on the join key. It iterates through both tables simultaneously, merging matching rows. Merge joins are efficient for large datasets when both tables are sorted.
+3. **Hash Join**: This algorithm builds a hash table for the smaller of the two tables based on the join key. It then scans the larger table and probes the hash table to find matching rows. Hash joins are effective for large, unsorted datasets.
+
+The choice of join algorithm depends on factors such as the size of the tables, the presence of indexes, and the distribution of data. Database engines use query optimizers to select the most appropriate join algorithm for a given query to ensure optimal performance.
+
+</details>
+
+<details>
+
+<summary>How to rollback actually work? </summary>
+
+Rollback is a database operation that reverses changes made during a transaction, restoring the database to its previous state before the transaction began. When a transaction is initiated, the database management system (DBMS) keeps track of all the changes made to the data. If an error occurs or if the transaction needs to be aborted for any reason, the rollback operation is triggered. During the rollback process, the DBMS uses a transaction log or undo log to identify the changes that were made and systematically reverses them. This ensures that any partial or incomplete changes do not persist in the database, maintaining data integrity and consistency.
+
+</details>
+
+<details>
+
+<summary>How to avoid race condition in DB? Read/Write lock?</summary>
+
+To avoid race conditions in a database, you can implement various concurrency control mechanisms, including:
+
+1. **Locks**: Use read/write locks to control access to database resources. A read lock allows multiple transactions to read a resource simultaneously, while a write lock ensures exclusive access for a transaction that is modifying the resource. This prevents other transactions from reading or writing to the resource until the write lock is released.
+2. **Transactions**: Use transactions to group multiple operations into a single unit of work. This ensures that either all operations are completed successfully, or none are applied, maintaining data integrity.
+3. **Optimistic Concurrency Control**: Allow multiple transactions to proceed without locking resources, but check for conflicts before committing changes. If a conflict is detected, the transaction is rolled back and retried.
+4. **Pessimistic Concurrency Control**: Lock resources as soon as they are accessed, preventing other transactions from accessing them until the lock is released.
+5. **Isolation Levels**: Set appropriate isolation levels to control the visibility of changes made by concurrent transactions, reducing the likelihood of race conditions.
+
+By implementing these strategies, you can effectively manage concurrent access to database resources and minimize the risk of race conditions.
+
+</details>
+
+<details>
+
+<summary>What is Try-Confirm Cancel? </summary>
+
+Try-Confirm-Cancel (TCC) is a distributed transaction management pattern used to ensure data consistency across multiple services or systems. It consists of three main phases:
+
+1. **Try**: In this phase, the system attempts to reserve the necessary resources or perform preliminary operations required for the transaction. This may involve checking availability, locking resources, or preparing data without making permanent changes.
+2. **Confirm**: If the Try phase is successful, the Confirm phase is executed, where the actual changes are committed to the database or system. This phase finalizes the transaction and makes the changes permanent.
+3. **Cancel**: If the Try phase fails or if any issues arise during the Confirm phase, the Cancel phase is triggered. This phase rolls back any changes made during the Try phase, releasing any reserved resources and ensuring that the system remains in a consistent state.
+
+TCC is commonly used in microservices architectures and distributed systems to manage complex transactions that span multiple services, ensuring data integrity and consistency even in the presence of failures.
+
+</details>
