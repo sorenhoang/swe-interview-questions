@@ -384,3 +384,76 @@ B Tree and B+ Tree are both balanced tree data structures used for indexing in d
 In summary, B+ Trees are often preferred in database systems for their efficiency in handling large datasets and range queries, while B Trees may be used in scenarios requiring more flexible data access patterns.
 
 </details>
+
+<details>
+
+<summary>Compare B+ tree vs LSM tree </summary>
+
+B+ Tree and LSM (Log-Structured Merge) Tree are both data structures used for indexing in databases, but they have different architectures and use cases:
+
+1. **Structure**:
+   - B+ Tree: A B+ Tree is a balanced tree structure where all data is stored in the leaf nodes, and internal nodes only store keys. It allows for efficient range queries and sequential access.
+   - LSM Tree: An LSM Tree is designed for high write throughput by using a combination of in-memory and on-disk components. It consists of multiple levels of sorted data structures, where new data is first written to an in-memory structure (memtable) and later flushed to disk in sorted order.
+
+2. **Write Performance**:
+   - B+ Tree: Write operations can be slower due to the need to maintain balance and update multiple nodes in the tree.
+   - LSM Tree: Optimized for high write performance, as writes are initially made to memory and then batched to disk, reducing the number of disk I/O operations.
+3. **Read Performance**:
+   - B+ Tree: Provides efficient read performance for both point queries and range queries due to its balanced structure.
+   - LSM Tree: Read performance can be slower, especially for point queries, as data may be spread across multiple levels and require merging during reads.
+4. **Use Cases**:
+   - B+ Tree: Commonly used in traditional relational databases where read performance and range queries are critical.
+   - LSM Tree: Often used in NoSQL databases and systems that require high write throughput, such as time-series databases and log management systems.
+
+In summary, B+ Trees are well-suited for read-heavy workloads with efficient range queries, while LSM Trees excel in write-heavy scenarios with high throughput requirements.
+
+</details>
+
+---
+
+# Database Internal Questions
+
+<details>
+
+<summary> What are sub-components of a database management system (DBMS)? </summary>
+
+A Database Management System (DBMS) consists of several sub-components that work together to manage and manipulate databases effectively. The main sub-components of a DBMS include:
+
+- **File Manager**: Responsible for managing the physical storage of data on disk, including reading and writing data blocks.
+- **Buffer Manager**: Manages the in-memory cache of data blocks to reduce disk I/O operations and improve performance.
+- **Access Method**: Provides the mechanisms for accessing data stored in the database, such as indexing and hashing techniques.
+- **Query Processor**: Interprets and executes SQL queries, optimizing them for efficient data retrieval and manipulation.
+- **Transaction Manager**: Ensures the ACID properties (Atomicity, Consistency, Isolation, Durability) of transactions, managing concurrent access and recovery from failures.
+- **Storage Manager**: Handles the organization, storage, and retrieval of data in the database, including indexing and data structures.
+- **Catalog Manager**: Maintains metadata about the database structure, including information about tables, indexes, and constraints.
+- **Security Manager**: Manages user authentication, authorization, and access control to ensure data security.
+
+These sub-components work together to provide a robust and efficient environment for managing databases, ensuring data integrity, security, and performance.
+
+</details>
+
+<details>
+<summary> When Buffer pool is full,which page DBMS decice to evict? </summary>
+
+Because Buffer Pool is limited resource, when it is full, DBMS needs to evict some pages to make room for new pages. The decision of which page to evict is typically made using a page replacement algorithm.
+
+- Use eviction policy: LRU/MRU/Clock etc.
+- If page is clean, it can be evicted directly.
+- If page is dirty, it needs to be written back to disk before eviction.
+
+The most commonly used page replacement algorithm is the Least Recently Used (LRU) algorithm, which evicts the page that has not been accessed for the longest period of time. Other algorithms, such as Most Recently Used (MRU) or Clock, may also be used depending on the specific DBMS implementation and workload characteristics.
+
+</details>
+
+<details>
+<summary> Why WAL sequential write but data page write is random? How it effects to thoughtput and latency?</summary>
+
+Write-Ahead Logging (WAL) is designed to optimize write operations by using sequential writes, while data page writes can be random due to the nature of how data is stored and accessed in a database.
+
+WAL uses a log file to record changes before they are applied to the actual data pages. This log file is written sequentially, which is much faster than random writes because sequential writes minimize disk seek times and take advantage of the way storage devices are optimized for sequential access. As a result, WAL can significantly improve write throughput and reduce latency for write operations.
+
+In contrast, data page writes can be random because data pages may be scattered across the disk based on how the database organizes and stores data. When a data page needs to be updated, the DBMS may have to write to different locations on the disk, leading to increased seek times and reduced performance.
+
+Overall, the use of WAL with sequential writes helps to mitigate the performance impact of random data page writes, leading to improved throughput and lower latency for database operations.
+
+</details>
