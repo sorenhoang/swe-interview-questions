@@ -813,3 +813,22 @@ An **inode** (index node) is a data structure used in Unix-like file systems to 
 Inodes do not store the file name or the actual data; instead, the file name is stored in a directory entry that maps to the corresponding inode. Each file is identified by its inode number, which is unique within a file system.
 
 </details>
+
+<details>
+
+<summary>What is stack overflow?</summary>
+
+A **stack overflow** occurs when a program uses more stack memory than is allocated for it, leading to the corruption of adjacent memory or program crashes.
+Common causes of stack overflow include:
+
+- Deep or infinite recursion: A function that calls itself too many times without a base case.
+- Excessive local variable allocation: Declaring large arrays or data structures as local variables within functions
+- Large function call chains: A series of nested function calls that consume significant stack space.
+- Improper use of pointers: Dereferencing invalid pointers that lead to stack corruption.
+
+To prevent **stack overflow**, developers can:
+
+- Limit recursion depth and ensure base cases are defined.
+- Use heap memory for large data structures instead of stack memory.
+- Monitor stack usage and adjust stack size if necessary.
+</details>
