@@ -832,3 +832,27 @@ To prevent **stack overflow**, developers can:
 - Use heap memory for large data structures instead of stack memory.
 - Monitor stack usage and adjust stack size if necessary.
 </details>
+
+<details>
+<summary>Explain stack and heap in OS</summary>
+
+**Stack:**
+
+- A region of memory that stores temporary variables created by functions.
+- Follows Last In First Out (LIFO) order for allocation and deallocation.
+- Automatically managed by the compiler.
+- Limited in size, leading to potential stack overflow if exceeded.
+
+**Heap:**
+
+- A region of memory used for dynamic memory allocation.
+- Memory is allocated and deallocated manually by the programmer (e.g., using malloc/free in C).
+- Larger and more flexible than the stack.
+- Can lead to fragmentation and memory leaks if not managed properly.
+
+**Key Differences:**
+
+- Stack is faster for allocation/deallocation, while heap is slower due to fragmentation.
+- Stack memory is automatically cleaned up, while heap memory requires manual management.
+- Stack is used for function calls and local variables, while heap is used for objects that need to persist beyond function scope.
+</details>
