@@ -457,3 +457,26 @@ In contrast, data page writes can be random because data pages may be scattered 
 Overall, the use of WAL with sequential writes helps to mitigate the performance impact of random data page writes, leading to improved throughput and lower latency for database operations.
 
 </details>
+
+<details>
+<summary> How database achieve concurrency? </summary>
+
+Databases achieve concurrency through various mechanisms that allow multiple transactions to access and manipulate data simultaneously without interfering with each other. Some of the key techniques used to achieve concurrency include:
+
+- **Locking**: Databases use locks to control access to data resources. Read locks allow multiple transactions to read data simultaneously, while write locks ensure exclusive access for transactions that modify data. Different levels of locking (e.g., row-level, page-level, table-level) can be used to balance concurrency and performance.
+- **Isolation Levels**: Databases provide different isolation levels (e.g., Read Uncommitted, Read Committed, Repeatable Read, Serializable) that define the degree to which transactions are isolated from each other. Higher isolation levels provide stronger guarantees but may reduce concurrency.
+- **Optimistic Concurrency Control**: This approach allows transactions to proceed without locking resources, but checks for conflicts before committing changes. If a conflict is detected, the transaction is rolled back and retried.
+- **Multiversion Concurrency Control (MVCC)**: MVCC allows multiple versions of data to exist simultaneously, enabling readers to access a consistent snapshot of the data without being blocked by writers. This improves concurrency by reducing contention between read and write operations.
+
+By implementing these techniques, databases can effectively manage concurrent access to data, ensuring data integrity and consistency while maximizing performance.
+
+</details>
+
+<details>
+<summary> What is hot page? </summary>
+
+A hot page in a database refers to a data page that is frequently accessed or modified by multiple transactions within a short period of time. Hot pages can lead to contention and performance bottlenecks, as multiple transactions may compete for access to the same page, resulting in increased locking and waiting times. This can negatively impact the overall throughput and latency of database operations.
+
+To mitigate the effects of hot pages, database administrators may implement strategies such as partitioning data, redistributing workloads, or optimizing indexing to reduce contention. Additionally, monitoring tools can help identify hot pages and allow for proactive management to ensure optimal database performance.
+
+</details>
