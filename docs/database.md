@@ -332,3 +332,55 @@ Try-Confirm-Cancel (TCC) is a distributed transaction management pattern used to
 TCC is commonly used in microservices architectures and distributed systems to manage complex transactions that span multiple services, ensuring data integrity and consistency even in the presence of failures.
 
 </details>
+
+<details>
+
+<summary>what is unique key, and how to create unique key for good? </summary>
+
+A unique key is a database constraint that ensures all values in a specific column or a combination of columns are distinct across the rows of a table. This means that no two rows can have the same value(s) for the unique key, which helps maintain data integrity and prevents duplicate entries.
+
+To create a unique key effectively, consider the following best practices:
+
+1. **Choose Appropriate Columns**: Select columns that naturally have unique values, such as email addresses, usernames, or identification numbers.
+2. **Composite Unique Keys**: If a single column does not guarantee uniqueness, consider creating a composite unique key using multiple columns that together ensure uniqueness.
+3. **Indexing**: Ensure that the unique key is indexed to improve query performance when searching for specific values.
+4. **Naming Conventions**: Use clear and consistent naming conventions for unique keys to make it easier to identify them in the database schema.
+5. **Data Validation**: Implement data validation at the application level to prevent attempts to insert duplicate values before they reach the database.
+   By following these practices, you can create effective unique keys that help maintain the integrity and reliability of your database.
+
+</details>
+
+<details>
+<summary>What is snapshot isolation? </summary>
+
+Snapshot isolation is a concurrency control mechanism used in database management systems to provide a consistent view of the data to each transaction. Under snapshot isolation, when a transaction begins, it takes a "snapshot" of the database at that point in time. This means that the transaction will see the data as it existed at the start of the transaction, regardless of any changes made by other concurrent transactions. This allows multiple transactions to read and write data simultaneously without interfering with each other, reducing contention and improving performance.
+
+Snapshot isolation helps prevent issues such as dirty reads and non-repeatable reads, but it may still allow for phantom reads. It is commonly used in systems that require high concurrency and consistency, such as financial applications and online transaction processing systems.
+
+</details>
+
+<details>
+
+<summary>Compare B Tree vs B+ Tree </summary>
+
+B Tree and B+ Tree are both balanced tree data structures used for indexing in databases, but they have some key differences:
+
+1. **Structure**:
+   - B Tree: In a B Tree, both internal nodes and leaf nodes store keys and data pointers. This means that data can be found at any level of the tree.
+   - B+ Tree: In a B+ Tree, only the leaf nodes store data pointers, while internal nodes only store keys. This results in a more uniform structure where all data is found at the leaf level.
+
+2. **Leaf Node Linking**:
+   - B Tree: Leaf nodes are not linked, which can make range queries less efficient.
+   - B+ Tree: Leaf nodes are linked together in a linked list, allowing for efficient range queries and sequential access to data.
+
+3. **Height**:
+   - B Tree: Generally has a greater height compared to B+ Trees for the same amount of data, which can lead to more disk accesses during searches.
+   - B+ Tree: Typically has a shorter height, resulting in fewer disk accesses and faster search times.
+
+4. **Use Cases**:
+   - B Tree: Suitable for scenarios where both read and write operations are frequent, and data needs to be accessed at various levels.
+   - B+ Tree: More commonly used in database indexing due to its efficiency in range queries and sequential access patterns.
+
+In summary, B+ Trees are often preferred in database systems for their efficiency in handling large datasets and range queries, while B Trees may be used in scenarios requiring more flexible data access patterns.
+
+</details>
