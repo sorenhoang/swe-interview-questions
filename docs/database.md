@@ -480,3 +480,24 @@ A hot page in a database refers to a data page that is frequently accessed or mo
 To mitigate the effects of hot pages, database administrators may implement strategies such as partitioning data, redistributing workloads, or optimizing indexing to reduce contention. Additionally, monitoring tools can help identify hot pages and allow for proactive management to ensure optimal database performance.
 
 </details>
+
+<details>
+<summary> Explain: Buffering, Immutability, and Ordering when DBMS. </summary>
+
+- **Buffering**: Buffering in a DBMS refers to the use of memory (buffer pool) to temporarily store data pages that are frequently accessed or modified. This helps reduce the number of disk I/O operations, as data can be read from or written to memory instead of disk, leading to improved performance and reduced latency.
+- **Immutability**: Immutability in a DBMS context refers to the concept of treating data as unchangeable once it has been written. Instead of modifying existing data, new versions of the data are created for any updates. This approach can help maintain data integrity, simplify concurrency control, and facilitate features like time travel queries or auditing.
+- **Ordering**: Ordering in a DBMS refers to the arrangement of data in a specific sequence, often based on certain criteria such as primary keys or indexed columns. Proper ordering can enhance query performance by enabling efficient data retrieval, reducing the need for sorting operations during query execution. Additionally, ordering can be important for maintaining consistency in transactions and ensuring that operations are executed in the correct sequence.
+</details>
+
+<details>
+<summary> What is database fragmentation? </summary>
+
+Database fragmentation refers to the process of dividing a database into smaller, more manageable pieces or fragments. This can be done for various reasons, such as improving performance, enhancing scalability, or optimizing resource utilization. Fragmentation can occur at different levels, including:
+
+- **Horizontal Fragmentation**: Dividing a table into subsets of rows based on specific criteria, such as geographic location or customer type.
+- **Vertical Fragmentation**: Dividing a table into subsets of columns, allowing for more efficient access to frequently used attributes.
+- **Hybrid Fragmentation**: A combination of both horizontal and vertical fragmentation.
+
+Database fragmentation can help reduce query response times, improve load balancing, and enhance overall system performance by allowing for parallel processing and localized data access. However, it also introduces complexity in terms of data management, query optimization, and maintaining data consistency across fragments.
+
+</details>
